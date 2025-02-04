@@ -8,7 +8,7 @@ public class OptionsParserTest
     @Test
     void validArguments()
     {
-        String[] args = {"-o", "output", "-p", "pre_", "-a", "-f", "test01.txt", "test02.txt"};
+        String[] args = {"test01.txt", "test02.txt", "-o", "output", "-p", "pre_", "-a", "-f"};
         AppConfig config = parser.parse(args);
 
         assertEquals("output", config.getOutputPath().toString());
@@ -49,7 +49,7 @@ public class OptionsParserTest
     @Test
     void unknownOption()
     {
-        String[] args = {"-x", "file.txt"};
+        String[] args = {"file.txt", "-x"};
         assertThrows(IllegalArgumentException.class, () -> parser.parse(args),
                 "Unknown option: -x");
     }
@@ -63,7 +63,7 @@ public class OptionsParserTest
         assertEquals("", config.getOutputPath().toString());
         assertEquals("", config.getFilePrefix());
         assertFalse(config.isAppendMode());
-        assertEquals(AppConfig.StatsType.SHORT, config.getStatsType());
+        assertEquals(AppConfig.StatsType.NONE, config.getStatsType());
         assertEquals(1, config.getInputFiles().size());
     }
 

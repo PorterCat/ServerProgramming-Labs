@@ -7,18 +7,12 @@ public class OptionsParser
     {
         AppConfig config = new AppConfig();
         List<String> inputFiles = new ArrayList<>();
-        int i = 0;
 
-        boolean hasS = false;
-        boolean hasF = false;
-
-        while (i < args.length)
+        for(int i = 0; i < args.length; ++i)
         {
-            String arg = args[i];
-
-            if (arg.startsWith("-"))
+            if (args[i].startsWith("-"))
             {
-                switch (arg)
+                switch (args[i])
                 {
                     case "-o":
                         checkHasNext(args, i, "Missing value for -o option");
@@ -35,32 +29,25 @@ public class OptionsParser
                         break;
 
                     case "-s":
-                        if (hasF)
-                        {
+                        if (config.getStatsType() != AppConfig.StatsType.NONE)
                             throw new IllegalArgumentException("Conflicting options: -s and -f");
-                        }
-                        hasS = true;
                         config.setStatsType(AppConfig.StatsType.SHORT);
                         break;
 
                     case "-f":
-                        if (hasS)
-                        {
+                        if (config.getStatsType() != AppConfig.StatsType.NONE)
                             throw new IllegalArgumentException("Conflicting options: -f and -s");
-                        }
-                        hasF = true;
                         config.setStatsType(AppConfig.StatsType.FULL);
                         break;
 
                     default:
-                        throw new IllegalArgumentException("Unknown option: " + arg);
+                        throw new IllegalArgumentException("Unknown option: " + args[i]);
                 }
             }
             else
             {
-                inputFiles.add(arg);
+                inputFiles.add(args[i]);
             }
-            i++;
         }
 
         if (inputFiles.isEmpty())

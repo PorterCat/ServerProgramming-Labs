@@ -5,15 +5,14 @@ import java.util.List;
 
 public class AppConfig
 {
-    public enum StatsType { SHORT, FULL }
+    public enum StatsType { NONE, SHORT, FULL }
 
     private Path outputPath = Paths.get("");
     private String filePrefix = "";
     private boolean appendMode = false;
-    private StatsType statsType = StatsType.SHORT;
+    private StatsType statsType = StatsType.NONE;
     private final List<Path> inputFiles = new ArrayList<>();
 
-    // Геттеры и сеттеры
     public Path getOutputPath() { return outputPath; }
     public void setOutputPath(Path outputPath) { this.outputPath = outputPath; }
     public String getFilePrefix() { return filePrefix; }
