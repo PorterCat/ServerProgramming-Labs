@@ -13,14 +13,16 @@ public class FileHandler
     private final boolean appendMode;
     private final Map<String, BufferedWriter> writers;
 
-    public FileHandler(AppConfig config) {
+    public FileHandler(AppConfig config)
+    {
         this.outputPath = config.getOutputPath();
         this.filePrefix = config.getFilePrefix();
         this.appendMode = config.isAppendMode();
         this.writers = new HashMap<>();
     }
 
-    public void writeData(String dataType, String data) throws IOException {
+    public void writeData(String dataType, String data) throws IOException
+    {
         BufferedWriter writer = getWriterForType(dataType);
         writer.write(data);
         writer.newLine();
@@ -35,8 +37,10 @@ public class FileHandler
         }
     }
 
-    private BufferedWriter getWriterForType(String dataType) throws IOException {
-        if (!writers.containsKey(dataType)) {
+    private BufferedWriter getWriterForType(String dataType) throws IOException
+    {
+        if (!writers.containsKey(dataType))
+        {
             Path filePath = generateFilePath(dataType);
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath.toFile(), appendMode));
             writers.put(dataType, writer);
@@ -44,13 +48,13 @@ public class FileHandler
         return writers.get(dataType);
     }
 
-    private Path generateFilePath(String dataType) throws IOException {
+    private Path generateFilePath(String dataType) throws IOException
+    {
         String fileName = filePrefix + dataType + ".txt";
         Path filePath = outputPath.resolve(fileName);
 
-        if (!Files.exists(outputPath)) {
+        if (!Files.exists(outputPath))
             Files.createDirectories(outputPath);
-        }
 
         return filePath;
     }

@@ -25,6 +25,11 @@ public class Program
             DataProcessor dataProcessor = new DataProcessor(fileHandler, statsCollector);
             dataProcessor.processFiles(config.getInputFiles());
 
+            if(config.getStatsType() == AppConfig.StatsType.SHORT)
+                statsCollector.printShortStatistics();
+            else if(config.getStatsType() == AppConfig.StatsType.FULL)
+                statsCollector.printFullStatistics();
+
             fileHandler.closeAllWriters();
         }
         catch (IOException e)

@@ -22,9 +22,7 @@ public class DataProcessor {
             {
                 String line;
                 while ((line = reader.readLine()) != null)
-                {
                     processLine(line);
-                }
             }
             catch (IOException e)
             {
@@ -35,7 +33,8 @@ public class DataProcessor {
 
     private void processLine(String line)
     {
-        if (line.matches("-?\\d+"))
+        //if (line.matches("-?\\d+"))
+        if (line.matches("\\d+"))
         {
             try
             {
@@ -53,6 +52,17 @@ public class DataProcessor {
             {
                 fileHandler.writeData("floats", line);
                 statsCollector.addFloat(Float.parseFloat(line));
+            }
+            catch (IOException e)
+            {
+                System.out.println("Error writing float: " + e.getMessage());
+            }
+        }
+        else if (line.matches("-\\d+"))
+        {
+            try
+            {
+                fileHandler.writeData("minus_integers_example", line);
             }
             catch (IOException e)
             {

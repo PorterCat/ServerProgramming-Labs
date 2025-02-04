@@ -28,7 +28,14 @@ public class StatisticsCollector
         stringCount++;
     }
 
-    public void printStatistics()
+    public void printShortStatistics()
+    {
+        System.out.println("Integer count: " + intCount);
+        System.out.println("Float count: " + floatCount);
+        System.out.println("Strings count: " + stringCount);
+    }
+
+    public void printFullStatistics()
     {
         System.out.println("Integer stats:");
         System.out.println("Count: " + intCount);
@@ -38,7 +45,7 @@ public class StatisticsCollector
             System.out.println("Max: " + intMax);
         }
 
-        System.out.println("Float stats:");
+        System.out.println("\nFloat stats:");
         System.out.println("Count: " + floatCount);
         if (floatMin != null && floatMax != null)
         {

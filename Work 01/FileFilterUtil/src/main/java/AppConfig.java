@@ -14,12 +14,12 @@ public class AppConfig
     private final List<Path> inputFiles = new ArrayList<>();
 
     public Path getOutputPath() { return outputPath; }
-    public void setOutputPath(Path outputPath) { this.outputPath = outputPath; }
+    public AppConfig setOutputPath(Path outputPath) { this.outputPath = outputPath; return this;}
     public String getFilePrefix() { return filePrefix; }
-    public void setFilePrefix(String filePrefix) { this.filePrefix = filePrefix; }
+    public AppConfig setFilePrefix(String filePrefix) { this.filePrefix = filePrefix; return this;}
     public boolean isAppendMode() { return appendMode; }
-    public void setAppendMode(boolean appendMode) { this.appendMode = appendMode; }
+    public AppConfig setAppendMode(boolean appendMode) { this.appendMode = appendMode; return this;}
     public StatsType getStatsType() { return statsType; }
-    public void setStatsType(StatsType statsType) { this.statsType = statsType; }
+    public AppConfig setStatsType(StatsType statsType) { this.statsType = statsType; return this;}
     public List<Path> getInputFiles() { return inputFiles; }
 }
