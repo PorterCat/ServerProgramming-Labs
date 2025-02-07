@@ -20,6 +20,6 @@ tasks.test {
 
 tasks.jar {
     manifest {
-        attributes["Main-Class"] = "Program"
+        attributes["Main-Class"] = "filefilterutil.Program"
     }
 }

@@ -1,3 +1,5 @@
+import filefilterutil.Options;
+import filefilterutil.OptionsParser;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -9,12 +11,12 @@ public class OptionsParserTest
     void validArguments()
     {
         String[] args = {"test01.txt", "test02.txt", "-o", "output", "-p", "pre_", "-a", "-f"};
-        AppConfig config = parser.parse(args);
+        Options config = parser.parse(args);
 
         assertEquals("output", config.getOutputPath().toString());
         assertEquals("pre_", config.getFilePrefix());
         assertTrue(config.isAppendMode());
-        assertEquals(AppConfig.StatsType.FULL, config.getStatsType());
+        assertEquals(Options.StatsType.FULL, config.getStatsType());
         assertEquals(2, config.getInputFiles().size());
     }
 
@@ -57,13 +59,13 @@ public class OptionsParserTest
     @Test
     void defaultValues()
     {
-        String[] args = {"file.txt"};
-        AppConfig config = parser.parse(args);
+        String[] args = {"file1.txt"};
+        Options config = parser.parse(args);
 
         assertEquals("", config.getOutputPath().toString());
         assertEquals("", config.getFilePrefix());
         assertFalse(config.isAppendMode());
-        assertEquals(AppConfig.StatsType.NONE, config.getStatsType());
+        assertEquals(Options.StatsType.NONE, config.getStatsType());
         assertEquals(1, config.getInputFiles().size());
     }
 
@@ -71,7 +73,7 @@ public class OptionsParserTest
     void mixedOrder()
     {
         String[] args = {"file1.txt", "-a", "file2.txt", "-p", "test_"};
-        AppConfig config = parser.parse(args);
+        Options config = parser.parse(args);
 
         assertTrue(config.isAppendMode());
         assertEquals("test_", config.getFilePrefix());

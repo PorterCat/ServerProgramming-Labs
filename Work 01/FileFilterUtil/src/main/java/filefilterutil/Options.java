@@ -1,9 +1,12 @@
+package filefilterutil;
+
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AppConfig
+public class Options
 {
     public enum StatsType { NONE, SHORT, FULL }
 
@@ -14,12 +17,12 @@ public class AppConfig
     private final List<Path> inputFiles = new ArrayList<>();
 
     public Path getOutputPath() { return outputPath; }
-    public AppConfig setOutputPath(Path outputPath) { this.outputPath = outputPath; return this;}
+    public Options setOutputPath(Path outputPath) { this.outputPath = outputPath; return this;}
     public String getFilePrefix() { return filePrefix; }
-    public AppConfig setFilePrefix(String filePrefix) { this.filePrefix = filePrefix; return this;}
+    public Options setFilePrefix(String filePrefix) { this.filePrefix = filePrefix; return this;}
     public boolean isAppendMode() { return appendMode; }
-    public AppConfig setAppendMode(boolean appendMode) { this.appendMode = appendMode; return this;}
+    public Options setAppendMode(boolean appendMode) { this.appendMode = appendMode; return this;}
     public StatsType getStatsType() { return statsType; }
-    public AppConfig setStatsType(StatsType statsType) { this.statsType = statsType; return this;}
+    public Options setStatsType(StatsType statsType) { this.statsType = statsType; return this;}
     public List<Path> getInputFiles() { return inputFiles; }
 }

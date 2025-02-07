@@ -1,11 +1,13 @@
+package filefilterutil;
+
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 public class OptionsParser
 {
-    public AppConfig parse(String[] args) throws IllegalArgumentException
+    public Options parse(String[] args) throws IllegalArgumentException
     {
-        AppConfig config = new AppConfig();
+        Options config = new Options();
         List<String> inputFiles = new ArrayList<>();
 
         for(int i = 0; i < args.length; ++i)
@@ -29,15 +31,15 @@ public class OptionsParser
                         break;
 
                     case "-s":
-                        if (config.getStatsType() != AppConfig.StatsType.NONE)
+                        if (config.getStatsType() != Options.StatsType.NONE)
                             throw new IllegalArgumentException("Conflicting options: -s and -f");
-                        config.setStatsType(AppConfig.StatsType.SHORT);
+                        config.setStatsType(Options.StatsType.SHORT);
                         break;
 
                     case "-f":
-                        if (config.getStatsType() != AppConfig.StatsType.NONE)
+                        if (config.getStatsType() != Options.StatsType.NONE)
                             throw new IllegalArgumentException("Conflicting options: -f and -s");
-                        config.setStatsType(AppConfig.StatsType.FULL);
+                        config.setStatsType(Options.StatsType.FULL);
                         break;
 
                     default:

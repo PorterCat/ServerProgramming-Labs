@@ -1,3 +1,4 @@
+package filefilterutil;
 import java.io.IOException;
 
 public class Program
@@ -5,7 +6,7 @@ public class Program
     public static void main(String[] args)
     {
         OptionsParser parser = new OptionsParser();
-        AppConfig config = new AppConfig();
+        Options config = new Options();
 
         try
         {
@@ -20,15 +21,14 @@ public class Program
         try
         {
             FileHandler fileHandler = new FileHandler(config);
-            StatisticsCollector statsCollector = new StatisticsCollector();
 
-            DataProcessor dataProcessor = new DataProcessor(fileHandler, statsCollector);
-            dataProcessor.processFiles(config.getInputFiles());
+            DataSorter dataSorter = new DataSorter(fileHandler);
+            dataSorter.processFiles(config.getInputFiles());
 
-            if(config.getStatsType() == AppConfig.StatsType.SHORT)
-                statsCollector.printShortStatistics();
-            else if(config.getStatsType() == AppConfig.StatsType.FULL)
-                statsCollector.printFullStatistics();
+            if(config.getStatsType() == Options.StatsType.SHORT)
+                StatisticsCollector.printShortStatistics();
+            else if(config.getStatsType() == Options.StatsType.FULL)
+                StatisticsCollector.printFullStatistics();
 
             fileHandler.closeAllWriters();
         }
