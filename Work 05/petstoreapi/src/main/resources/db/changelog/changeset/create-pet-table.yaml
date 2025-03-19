@@ -1,0 +1,54 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-pet-table
+      author: your-name
+      changes:
+        - createTable:
+            tableName: pets
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: category_id
+                  type: bigint
+                  constraints:
+                    nullable: true
+                    foreignKeyName: fk_pet_category
+                    references: categories(id)
+              - column:
+                  name: status
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+                    validCheck: status IN ('available', 'pending', 'sold')
+
+        - createTable:
+            tableName: pet_tags
+            columns:
+              - column:
+                  name: pet_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_pet_tag_pet
+                    references: pets(id)
+              - column:
+                  name: tag_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_pet_tag_tag
+                    references: tags(id)
+            constraints:
+              primaryKey:
+                columnNames: pet_id, tag_id
