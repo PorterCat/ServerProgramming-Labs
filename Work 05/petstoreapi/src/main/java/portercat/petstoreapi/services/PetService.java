@@ -1,7 +1,10 @@
 package portercat.petstoreapi.services;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import portercat.petstoreapi.dto.PetRequestDTO;
 import portercat.petstoreapi.models.Category;
 import portercat.petstoreapi.models.Pet;
@@ -46,5 +49,34 @@ public class PetService
                 .tags(tags)
                 .status(dto.getStatus())
                 .build());
+    }
+
+    public Optional<Pet> getById(long id)
+    {
+        return _petRepository.findById(id);
+    }
+
+    public void deletePetById(long id)
+    {
+        if (!_petRepository.existsById(id))
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pet not found with ID: " + id);
+
+        _petRepository.deleteById(id);
+    }
+
+    public Pet updatePet(long id, PetRequestDTO dto)
+    {
+        Pet existingPet = _petRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Pet not found with ID: " + id));
+
+        existingPet.setName(dto.getName());
+        existingPet.setCategory(_categoryService.getCategoryById(dto.getCategoryId())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Category not found")));
+        existingPet.setTags(_tagService.getTagsByIds(dto.getTagIds()));
+        existingPet.setStatus(dto.getStatus());
+
+        return _petRepository.save(existingPet);
     }
 }

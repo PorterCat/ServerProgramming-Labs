@@ -14,15 +14,7 @@ import portercat.petstoreapi.services.PetService;
 import portercat.petstoreapi.services.TagService;
 
 import java.util.List;
-
-/*
-POST /api/categories — создать категорию
-GET /api/categories — получить все категории
-POST /api/tags — создать тег
-GET /api/tags — получить все теги
-POST /api/pets — создать питомца с проверкой category и tags
-GET /api/pets — получить всех питомцев
- */
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v3/pet")
@@ -34,7 +26,10 @@ public class PetController
     private final PetService _petService;
 
     @GetMapping("/tags")
-    public List<Tag> getAllTags() { return _tagService.getAllTags(); }
+    public ResponseEntity<List<Tag>> getAllTags()
+    {
+        return ResponseEntity.ok(_tagService.getAllTags());
+    }
 
     @PostMapping("/tags")
     public ResponseEntity<Tag> createTag(@RequestBody Tag tag)
@@ -44,20 +39,48 @@ public class PetController
     }
 
     @GetMapping("/categories")
-    public List<Category> getAllCategories() { return _categoryService.getAllCategories(); }
+    public ResponseEntity<List<Category>> getAllCategories()
+    {
+        return ResponseEntity.ok(_categoryService.getAllCategories());
+    }
 
     @PostMapping("/categories")
     public ResponseEntity<Category> createCategory(@RequestBody Category category)
     {
-        return ResponseEntity.ok(_categoryService.createCategory(category));
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(_categoryService.createCategory(category));
     }
 
     @GetMapping
-    public List<Pet> getAllPets() { return _petService.getAllPets(); }
+    public ResponseEntity<List<Pet>> getAllPets() { return ResponseEntity.ok(_petService.getAllPets()); }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Pet> getPetById(@PathVariable long id)
+    {
+        Optional<Pet> pet = _petService.getById(id);
+        return pet.isPresent() ?
+                ResponseEntity.ok(pet.get()) :
+                ResponseEntity.notFound().build();
+    }
 
     @PostMapping
     public ResponseEntity<Pet> createPet(@RequestBody PetRequestDTO dto)
     {
-        return ResponseEntity.ok(_petService.createPet(dto));
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(_petService.createPet(dto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deletePet(@PathVariable long id)
+    {
+        _petService.deletePetById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Pet> updatePet(@PathVariable long id, @RequestBody PetRequestDTO dto)
+    {
+        Pet updatedPet = _petService.updatePet(id, dto);
+        return ResponseEntity.ok(updatedPet);
     }
 }
