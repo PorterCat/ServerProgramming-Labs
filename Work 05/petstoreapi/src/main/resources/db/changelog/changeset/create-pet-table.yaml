@@ -1,7 +1,7 @@
 databaseChangeLog:
   - changeSet:
       id: create-pet-table
-      author: your-name
+      author: PorterCat
       changes:
         - createTable:
             tableName: pets
