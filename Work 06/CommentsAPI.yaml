@@ -1,0 +1,127 @@
+openapi: 3.0.0
+info:
+  title: Comment Management Service
+  description: API для управления комментариями
+  version: 1.0.0
+servers:
+  - url: http://api.example.com/v1
+paths:
+  /comments:
+    get:
+      summary: Получить список комментариев
+      responses:
+        '200':
+          description: Успешный ответ с массивом комментариев
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+    post:
+      summary: Создать новый комментарий
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewComment'
+      responses:
+        '201':
+          description: Комментарий успешно создан
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+
+  /comments/{commentId}:
+    get:
+      summary: Получить комментарий по ID
+      parameters:
+        - name: commentId
+          in: path
+          required: true
+          description: ID комментария
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Успешный ответ с комментариями
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+        '404':
+          description: Комментарий не найден
+
+    put:
+      summary: Обновить комментарий по ID
+      parameters:
+        - name: commentId
+          in: path
+          required: true
+          description: ID комментария
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewComment'
+      responses:
+        '200':
+          description: Комментарий успешно обновлен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+        '404':
+          description: Комментарий не найден
+
+    delete:
+      summary: Удалить комментарий по ID
+      parameters:
+        - name: commentId
+          in: path
+          required: true
+          description: ID комментария
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Комментарий успешно удален
+        '404':
+          description: Комментарий не найден
+
+components:
+  schemas:
+    Comment:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "1"
+        text:
+          type: string
+          example: "Это пример комментария."
+        author:
+          type: string
+          example: "Автор комментария"
+        createdAt:
+          type: string
+          format: date-time
+          example: "2023-10-01T12:00:00Z"
+
+    NewComment:
+      type: object
+      required:
+        - text
+        - author
+      properties:
+        text:
+          type: string
+          example: "Это новый комментарий."
+        author:
+          type: string
+          example: "Автор нового комментария"
