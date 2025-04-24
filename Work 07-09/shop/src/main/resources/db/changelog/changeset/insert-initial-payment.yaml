@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert_initial_payment
+      author: PorterCat
+      changes:
+        - insert:
+            tableName: payment
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 1
+              - column:
+                  name: amount
+                  valueNumeric: 1000.00
+              - column:
+                  name: status
+                  value: "COMPLETED"
+              - column:
+                  name: payment_type
+                  value: "CASH"
+        - insert:
+            tableName: cash_payment
+            columns:
+              - column:
+                  name: payment_id
+                  valueNumeric: 1
+              - column:
+                  name: cash_tendered
+                  valueNumeric: 1000

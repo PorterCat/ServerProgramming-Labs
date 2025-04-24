@@ -1,0 +1,37 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_order_table
+      author: PorterCat
+      changes:
+        - createTable:
+            tableName: order
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: date
+                  type: TIMESTAMP
+              - column:
+                  name: status
+                  type: VARCHAR(50)
+              - column:
+                  name: customer_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_order_customer
+                    referencedTableName: customer
+                    referencedColumnNames: id
+              - column:
+                  name: payment_id
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    foreignKeyName: fk_order_payment
+                    referencedTableName: payment
+                    referencedColumnNames: id

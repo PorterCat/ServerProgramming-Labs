@@ -1,0 +1,44 @@
+# create-session-table.yaml
+databaseChangeLog:
+  - changeSet:
+      id: create_session_table
+      author: PorterCat
+      changes:
+        - createTable:
+            tableName: session
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: token
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_session_user
+                    referencedTableName: user
+                    referencedColumnNames: id
+              - column:
+                  name: active
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: DATETIME
+                  constraints:
+                    nullable: false
+              - column:
+                  name: expiry_date
+                  type: DATETIME
+                  constraints:
+                    nullable: false

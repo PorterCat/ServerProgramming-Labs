@@ -1,0 +1,111 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_payment_table
+      author: PorterCat
+      changes:
+        - createTable:
+            tableName: payment
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: amount
+                  type: DECIMAL(19,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: payment_type
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: create_cash_table
+      author: PorterCat
+      changes:
+        - createTable:
+            tableName: cash_payment
+            columns:
+              - column:
+                  name: payment_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_cash_payment
+                    referencedTableName: payment
+                    referencedColumnNames: id
+                    primaryKey: true
+              - column:
+                  name: cash_tendered
+                  type: FLOAT
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: create_check_table
+      author: PorterCat
+      changes:
+        - createTable:
+            tableName: check_payment
+            columns:
+              - column:
+                  name: payment_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_check_payment
+                    referencedTableName: payment
+                    referencedColumnNames: id
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: bank_id
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: create_credit_payment_table
+      author: PorterCat
+      changes:
+        - createTable:
+            tableName: credit_payment
+            columns:
+              - column:
+                  name: payment_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_credit_payment
+                    referencedTableName: payment
+                    referencedColumnNames: id
+                    primaryKey: true
+              - column:
+                  name: number
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: exp_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false

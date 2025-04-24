@@ -1,0 +1,54 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_user_table
+      author: PorterCat
+      changes:
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: VARCHAR(255)
+              - column:
+                  name: password
+                  type: VARCHAR(255)
+              - column:
+                  name: role
+                  type: VARCHAR(32)
+
+  - changeSet:
+      id: create_customer_table
+      author: PorterCat
+      changes:
+        - createTable:
+            tableName: customer
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: fk_customer_user
+                    referencedTableName: user
+                    referencedColumnNames: id
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: address_city
+                  type: VARCHAR(255)
+              - column:
+                  name: address_street
+                  type: VARCHAR(255)
+              - column:
+                  name: address_zipcode
+                  type: VARCHAR(20)
