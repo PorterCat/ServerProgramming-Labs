@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppointmentService.Api", "AppointmentService.Api\AppointmentService.Api.csproj", "{7F4C9238-2B77-41B2-9605-5744D1684A3B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C0285513-3061-4696-9493-614584508F10}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppointmentService.DataAccess", "AppointmentService.DataAccess\AppointmentService.DataAccess.csproj", "{90E64056-9C84-4B6B-8CAA-8F9FF6062BCE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppointmentService.Core", "AppointmentService.Core\AppointmentService.Core.csproj", "{C726683E-589C-4DAB-A82F-FCFABBC25D77}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F4C9238-2B77-41B2-9605-5744D1684A3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F4C9238-2B77-41B2-9605-5744D1684A3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F4C9238-2B77-41B2-9605-5744D1684A3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F4C9238-2B77-41B2-9605-5744D1684A3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90E64056-9C84-4B6B-8CAA-8F9FF6062BCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90E64056-9C84-4B6B-8CAA-8F9FF6062BCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90E64056-9C84-4B6B-8CAA-8F9FF6062BCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90E64056-9C84-4B6B-8CAA-8F9FF6062BCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C726683E-589C-4DAB-A82F-FCFABBC25D77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C726683E-589C-4DAB-A82F-FCFABBC25D77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C726683E-589C-4DAB-A82F-FCFABBC25D77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C726683E-589C-4DAB-A82F-FCFABBC25D77}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
